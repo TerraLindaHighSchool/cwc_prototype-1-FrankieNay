@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControllerX : MonoBehaviour
 {
@@ -8,11 +9,25 @@ public class PlayerControllerX : MonoBehaviour
     public float rotationSpeed;
     public float verticalInput;
     public float horizontalInput;
+    private int count;
+    public Text countText;
+    public Text winText;
 
     // Start is called before the first frame update
     void Start()
     {
+        count = 0;
+        setCountText();
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("pickup"))
+        {
+            other.gameObject.SetActive(false);
+            count = count + 1;
+            setCountText();
+        }
     }
 
     // Update is called once per frame
@@ -30,5 +45,14 @@ public class PlayerControllerX : MonoBehaviour
         transform.Rotate(Vector3.left, verticalInput * rotationSpeed * Time.deltaTime);
 
         transform.Rotate(Vector3.back, horizontalInput * rotationSpeed * Time.deltaTime);
+    }
+
+    void setCountText()
+    {
+        countText.text = "Count : " + count.ToString();
+        if (count >= 6)
+        {
+            winText.text = "You Win!";
+        }
     }
 }
