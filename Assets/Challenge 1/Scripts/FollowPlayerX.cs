@@ -16,7 +16,7 @@ public class FollowPlayerX : MonoBehaviour
 
     void Update()
     {
-        
+        //Camera follows planes every move.
         transform.position = plane.transform.position;
         transform.rotation = plane.transform.rotation;
 

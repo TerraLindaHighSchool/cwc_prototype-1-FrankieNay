@@ -24,6 +24,8 @@ public class PlayerControllerX : MonoBehaviour
     {
         if (other.gameObject.CompareTag("pickup"))
         {
+            AudioSource source = GetComponent<AudioSource>();
+            source.Play();
             other.gameObject.SetActive(false);
             count = count + 1;
             setCountText();
@@ -50,7 +52,7 @@ public class PlayerControllerX : MonoBehaviour
     void setCountText()
     {
         countText.text = "Count : " + count.ToString();
-        if (count >= 6)
+        if (count >= 20)
         {
             winText.text = "You Win!";
         }
